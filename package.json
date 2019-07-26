@@ -1,0 +1,34 @@
+{
+  "name": "gvmml",
+  "version": "1.0.0",
+  "description": "Integração GVM com a api do mercadolivre",
+  "main": "server.js",
+  "scripts": {
+    "start": "nodemon server.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/DTineli/gvmml.git"
+  },
+  "keywords": [
+    "GVM",
+    "mercadolivre",
+    "api",
+    "integração"
+  ],
+  "author": "Daniel Tineli jr",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/DTineli/gvmml/issues"
+  },
+  "homepage": "https://github.com/DTineli/gvmml#readme",
+  "devDependencies": {
+    "nodemon": "^1.19.1"
+  },
+  "dependencies": {
+    "ejs": "^2.6.2",
+    "express": "^4.17.1",
+    "mercadolibre": "0.0.13"
+  }
+}
