@@ -10,4 +10,5 @@ router.get('/', (req, res) => {
     res.render('mainPage', { authUrl: meli.getAuthURL(config.redirect_uri) });
 });
 
+
 module.exports = router;

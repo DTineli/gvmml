@@ -16,6 +16,7 @@ app.use(connectionMeddleware(pool));
 //ROTAS
 app.use('/', require('./app/routes/mainRoute'));
 app.use('/auth', require('./app/routes/authRoute'));
+app.use('/logged', require('./app/routes/loggedRoute'));
 
 app.use((err, req, res, next) => {
     console.error(err.stack);
