@@ -1,4 +1,4 @@
-exports.config = {
+module.exports = {
 
     client_id: 5184620860493923,
     secret_key: "0BzXxDJcm9l2BuB32GLgJ3tD9p6SqIgp",
