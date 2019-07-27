@@ -1,17 +1,13 @@
 const mysql = require('mysql2');
 
 const pool = mysql.createPool({
-    connectionLimit,
+    connectionLimit: 10,
     host: 'localhost',
     port: '3900',
     user: 'gvm',
     password: 'gvmsistemas#',
     database: 'cim'
 });
-
-console.log('pool => criado');
-
-pool.on('release', () => console.log('pool => conexão retornada'));
 
 process.on('SIGINT', () =>
     pool.end(err => {
