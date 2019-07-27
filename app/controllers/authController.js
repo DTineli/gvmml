@@ -24,10 +24,10 @@ exports.getAuth = (req, res, next) => {
                                 if (err) {
                                     next(err);
                                 }
-                                res.redirect('/');
+                                res.redirect('/logged/' + response.user_id);
                             })
                     } else {
-                        res.redirect('/');
+                        res.redirect('/logged/' + response.user_id);
                     }
 
                 })
