@@ -13,6 +13,8 @@ app.set('views', './app/views');
 app.use(express.static(path.join(__dirname + '/app', 'public')));
 app.use(connectionMeddleware(pool));
 
+//ROTAS
+app.use('/', require('./app/routes/mainRoute'));
 
 app.use((err, req, res, next) => {
     console.error(err.stack);

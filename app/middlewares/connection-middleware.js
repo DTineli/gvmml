@@ -2,7 +2,6 @@ module.exports = pool => (req, res, next) => {
 
     pool.getConnection((err, connection) => {
         if (err) return next(err);
-        console.log('pool => obteve conexão');
         // adicionou a conexão na requisição
         req.connection = connection;
         // passa a requisição o próximo middleware

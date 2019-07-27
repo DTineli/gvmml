@@ -4,8 +4,8 @@ const pool = mysql.createPool({
     connectionLimit: 10,
     host: 'localhost',
     port: '3900',
-    user: 'gvm',
-    password: 'gvmsistemas#',
+    user: 'root',
+    password: '',
     database: 'cim'
 });
 
