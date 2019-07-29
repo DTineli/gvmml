@@ -40,7 +40,6 @@
             <div class="col-md-10 order-md-1">
 
                 <form class="needs-validation" method="GET" action="/anuncio" novalidate>
-
                     <div class="mb-3">
                         <label for="descricao">Referencia</label>
                         <div class="input-group">
@@ -52,7 +51,9 @@
                         </div>
                     </div>
                     <hr class="mb-4">
+                    <input type="hidden" id="access_token" name="access_token" value="<%= access_token%>">
                     <button class="btn btn-primary btn-lg btn-block" type="submit">Procurar</button>
+
                 </form>
             </div>
         </div>
