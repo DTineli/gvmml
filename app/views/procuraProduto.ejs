@@ -32,55 +32,27 @@
         <div class="py-5 text-center">
             <img class="d-block mx-auto mb-4" src="/docs/4.3/assets/brand/bootstrap-solid.svg" alt="" width="72"
                 height="72">
-            <h2>Criação de Anuncio</h2>
+            <h2>Procura Produto</h2>
         </div>
 
         <div class="row">
 
             <div class="col-md-10 order-md-1">
 
-                <form class="needs-validation" novalidate>
-                    <div class="row">
-                        <div class="col-md-10 mb-3">
-                            <label for="Titulo_Anuncio">Titulo do anuncio</label>
-                            <input type="text" class="form-control" id="Titulo_Anuncio" placeholder=""
-                                name="Titulo_Anuncio" value="<%=titulo %>" required>
-                            <div class="invalid-feedback">
-                                Titulo obrigatorio
-                            </div>
-                        </div>
-                        <div class="col-md-2 mb-3">
-                            <label for="lastName">Preço</label>
-                            <input type="text" class="form-control" id="preco" placeholder="" name="preco"
-                                value="<%= valor%>" required>
-                            <div class="invalid-feedback">
-                                Preço obrigatorio
-                            </div>
-                        </div>
-                    </div>
+                <form class="needs-validation" method="GET" action="/anuncio" novalidate>
 
                     <div class="mb-3">
-                        <label for="descricao">Descrição</label>
+                        <label for="descricao">Referencia</label>
                         <div class="input-group">
-                            <input type="text" class="form-control" value="<%=descricao%>" id="descricao"
-                                placeholder="descricao" required>
+                            <input type="text" class="form-control" id="referencia" name="referencia"
+                                placeholder="referencia" required>
                             <div class="invalid-feedback" style="width: 100%;">
-                                Descricao obrigatoria
+                                Referencia obrigatoria
                             </div>
                         </div>
                     </div>
-
-                    <div class="mb-3">
-                        <label for="qtd_dispo">Quantidade disponivel </label>
-                        <input type="qtd_dispo" class="form-control" id="qtd_dispo" value="<%= estoque %>"
-                            placeholder="">
-                        <div class="invalid-feedback">
-
-                        </div>
-                    </div>
-
                     <hr class="mb-4">
-                    <button class="btn btn-primary btn-lg btn-block" type="submit">Criar</button>
+                    <button class="btn btn-primary btn-lg btn-block" type="submit">Procurar</button>
                 </form>
             </div>
         </div>

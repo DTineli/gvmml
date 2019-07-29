@@ -1,11 +1,11 @@
-const mysql = require('mysql');
+const mysql = require('mysql2');
 
 const pool = mysql.createPool({
     connectionLimit: 10,
     host: 'localhost',
     port: '3900',
-    user: 'root',
-    password: '',
+    user: 'gvm',
+    password: 'gvmsistemas#',
     database: 'cim'
 });
 
