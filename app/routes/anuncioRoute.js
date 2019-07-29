@@ -5,6 +5,6 @@ const router = express.Router();
 
 router.get('/produto', anuncioController.GetProduto);
 router.get('/', anuncioController.getAnuncio);
-
+router.post('/postAnuncio', anuncioController.postAnuncio);
 
 module.exports = router;

@@ -31,3 +31,7 @@ exports.getAnuncio = (req, res, next) => {
         res.render('procuraProduto');
     }
 }
+
+exports.postAnuncio = (req, res, next) => {
+    console.log(req.body);
+}

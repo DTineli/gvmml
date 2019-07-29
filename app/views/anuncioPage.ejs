@@ -39,12 +39,12 @@
 
             <div class="col-md-10 order-md-1">
 
-                <form class="needs-validation" action="/postAnuncio" method="POST" novalidate>
+                <form class="needs-validation" action="/anuncio/postAnuncio" method="POST">
                     <div class="row">
                         <div class="col-md-10 mb-3">
                             <label for="Titulo_Anuncio">Titulo do anuncio</label>
-                            <input type="text" class="form-control" id="Titulo_Anuncio" placeholder=""
-                                name="Titulo_Anuncio" value="<%=titulo %>" required>
+                            <input type="text" class="form-control" id="titulo_Anuncio" placeholder=""
+                                name="titulo_Anuncio" value="<%=titulo %>" required>
                             <div class="invalid-feedback">
                                 Titulo obrigatorio
                             </div>

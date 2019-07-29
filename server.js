@@ -1,6 +1,7 @@
 const path = require('path');
 
 const express = require('express');
+const bodyParser = require('body-parser');
 
 const pool = require('./app/config/pool-factory');
 const connectionMeddleware = require('./app/middlewares/connection-middleware');
@@ -10,6 +11,7 @@ const app = express();
 app.set('view engine', 'ejs');
 app.set('views', './app/views');
 
+app.use(bodyParser.urlencoded({ extended: false }));
 app.use(express.static(path.join(__dirname + '/app', 'public')));
 app.use(connectionMeddleware(pool));
 
