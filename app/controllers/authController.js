@@ -25,6 +25,7 @@ exports.getAuth = (req, res, next) => {
                                     if (err) {
                                         next(err);
                                     }
+                                    req.session.user_id = response.user_id;
                                     req.session.access_token_ml = response.access_token;
                                     res.redirect('/logged/' + user_id);
                                 })
@@ -39,6 +40,7 @@ exports.getAuth = (req, res, next) => {
                                     if (err) {
                                         next(err);
                                     }
+                                    req.session.user_id = response.user_id;
                                     req.session.access_token_ml = response.access_token;
                                     req.connection.query('UPDATE userml SET access_token = ?, refresh_token = ? WHERE user_id = ?',
                                         [response.access_token, response.refresh_token, user_id], (err, response) => {
@@ -50,6 +52,7 @@ exports.getAuth = (req, res, next) => {
                                 })
                             }
                         });
+                        req.session.user_id = response.user_id;
                         req.session.access_token_ml = response.access_token;
                         res.redirect('/logged/' + user_id);
                     }

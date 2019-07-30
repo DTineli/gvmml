@@ -53,7 +53,7 @@ exports.postAnuncio = (req, res, next) => {
         "pictures": [
             { "source": "https://www.google.com/url?sa=i&source=images&cd=&ved=2ahUKEwjGsIHt0drjAhUVCrkGHQ5_AU0QjRx6BAgBEAU&url=https%3A%2F%2Fwww.editorajuspodivm.com.br%2Fteste&psig=AOvVaw16CaF-k4gTSGrYwmSK5XqI&ust=1564507255157642" }
         ]
-    }, { "access_token": req.body.access_token }, (err, response) => {
+    }, { "access_token": req.session.access_token_ml }, (err, response) => {
         if (err) {
             console.log('ERRR');
             console.log(err);
