@@ -31,6 +31,7 @@ app.use('/', require('./app/routes/mainRoute'));
 app.use('/auth', require('./app/routes/authRoute'));
 app.use('/logged', require('./app/routes/loggedRoute'));
 app.use('/anuncio', require('./app/routes/anuncioRoute'));
+app.use('/orders', require('./app/routes/orderRoute'));
 
 app.use((err, req, res, next) => {
     console.error(err.stack);
