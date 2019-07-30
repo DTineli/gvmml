@@ -25,6 +25,7 @@ exports.getAuth = (req, res, next) => {
                                     if (err) {
                                         next(err);
                                     }
+                                    req.session.access_token_ml = response.access_token;
                                     res.redirect('/logged/' + user_id);
                                 })
                     } else {
@@ -36,9 +37,9 @@ exports.getAuth = (req, res, next) => {
                             if (response.message === 'invalid_token') {
                                 meli.refreshAccessToken((err, response) => {
                                     if (err) {
-
                                         next(err);
                                     }
+                                    req.session.access_token_ml = response.access_token;
                                     req.connection.query('UPDATE userml SET access_token = ?, refresh_token = ? WHERE user_id = ?',
                                         [response.access_token, response.refresh_token, user_id], (err, response) => {
                                             if (err) {
@@ -49,6 +50,7 @@ exports.getAuth = (req, res, next) => {
                                 })
                             }
                         });
+                        req.session.access_token_ml = response.access_token;
                         res.redirect('/logged/' + user_id);
                     }
 
