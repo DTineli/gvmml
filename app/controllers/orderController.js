@@ -44,7 +44,16 @@ exports.getOrder = (req, res, next) => {
                         if (err) {
                             console.log(err);
                         }
-                        console.log(insertRes);
+                        req.connection.query("INSERT INTO movitem (recnum, fkmov, fkvariacao, quantidade, valor) VALUES (?, ?, 16608, 1, ?)", [
+                            response.id,
+                            response.id,
+                            response.payments[0].transaction_amount
+                        ], (err, itemRes) => {
+                            if (err) {
+                                console.log(err);
+                            }
+                            console.log(itemRes);
+                        });
                     })
                 })
             }
