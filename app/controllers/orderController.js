@@ -25,7 +25,32 @@ exports.getOrder = (req, res, next) => {
         if (err) {
             next(err);
         }
-        console.log(response);
+        req.connection.query("INSERT INTO contato (fkempresa, situacao, nome, cnpj_cpf) VALUES (1, 'A', ?, '48345694896')", [response.buyer.nickname], (err, dbRes) => {
+            if (err) {
+                next(err);
+            } else {
+                req.connection.query("SELECT recnum from contato where cnpj_cpf = 48345694896", (err, cliente) => {
+                    if (err) {
+                        next(err);
+                    }
+                    req.connection.query("INSERT INTO mov (recnum, documento, data, fkcontato, fkmovtipo, situacao, fkempresa, fktabpre, total_produtos, total_liquido) VALUES (?, ?, ?, ?, 21, 'R', 1, 1, ?, ? )", [
+                        response.id,
+                        response.id,
+                        new Date(),
+                        cliente[0].recnum,
+                        response.payments[0].transaction_amount,
+                        response.payments[0].transaction_amount,
+                    ], (err, insertRes) => {
+                        if (err) {
+                            console.log(err);
+                        }
+                        console.log(insertRes);
+                    })
+                })
+            }
+
+        });
+        console.log(response.payments.total_paid_amount);
         res.render('detalheOrderPage', { order: response });
     })
 
