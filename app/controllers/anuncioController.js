@@ -1,29 +1,30 @@
 const meli = require('../config/meli-factory');
 
 exports.GetProduto = (req, res, next) => {
-    res.render('procuraProduto', { access_token: req.query.access_token });
+    res.render('procuraProduto');
 }
 
 exports.getAnuncio = (req, res, next) => {
     const referencia = req.query.referencia;
 
     if (referencia) {
-        req.connection.query('select p.recnum, descricao, descricao_site, round(t.valor, 2) as valor from produto p left join tabpreitem t on p.recnum = t.fkvariacao where referencia = ? and t.fktabela = ?', [referencia, 2],
+        req.connection.query('select p.recnum, descricao, descricao_site, round(t.valor, 2) as valor from produto p left join tabpreitem t on p.recnum = t.fkvariacao where referencia = ? and t.fktabela = ?', [referencia, req.query.tabela],
             (err, produto) => {
                 if (err) {
                     next(err);
                 }
 
-                if (produto.lengh == 0) {
+                if (produto == 0) {
                     res.render('procuraProduto');
                 } else {
-                    req.connection.query('SELECT saldo FROM estoque WHERE fkvariacao = ? and fkempresa = 1 ORDER BY data desc LIMIT 1', [produto[0].recnum], (err, estoque) => {
+                    req.connection.query('SELECT saldo FROM estoque WHERE fkvariacao = ? and fkempresa = 1 ORDER BY data desc LIMIT 1', req.query.variacao, (err, estoque) => {
                         res.render('anuncioPage', {
                             titulo: produto[0].descricao,
                             descricao: produto[0].descricao_site,
                             valor: produto[0].valor,
                             estoque: estoque[0].saldo,
-                            access_token: req.query.access_token
+                            access_token: "",
+                            variacao: req.query.variacao
                         });
                     })
                 }
@@ -58,6 +59,32 @@ exports.postAnuncio = (req, res, next) => {
             console.log('ERRR');
             console.log(err);
         }
-        res.render('produtoCriado', { link: response.permalink })
+
+        req.connection.query('INSERT INTO produtoml (id_ml, id_variacao) VALUES (?, ?)', [response.id, req.body.variacao], (err, responseProduto) => {
+            console.log(err);
+            res.render('produtoCriado', { link: response.permalink });
+        });
     });
+}
+
+exports.getVariacao = (req, res, next) => {
+    const referencia = req.params.referencia;
+
+    if (referencia) {
+        req.connection.query('SELECT recnum FROM produto where referencia = ?', [referencia], (err, produto) => {
+            if (err) {
+                return next(err);
+            }
+
+            if (produto == 0) {
+                res.send({ data: ['produto não encontrado'] })
+            } else {
+                req.connection.query("SELECT recnum, fkdetalhe from variacao where fkproduto = ? and situacao = 'A'", [produto[0].recnum], (err, variacao) => {
+                    res.send(variacao);
+                });
+            }
+
+        })
+    }
+
 }
