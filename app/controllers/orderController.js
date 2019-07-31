@@ -25,6 +25,7 @@ exports.getOrder = (req, res, next) => {
         if (err) {
             next(err);
         }
+        console.log(response.order_items[0].item.id);
         req.connection.query("INSERT INTO contato (fkempresa, situacao, nome, cnpj_cpf) VALUES (1, 'A', ?, '48345694896')", [response.buyer.nickname], (err, dbRes) => {
             if (err) {
                 next(err);
@@ -42,24 +43,29 @@ exports.getOrder = (req, res, next) => {
                         response.payments[0].transaction_amount,
                     ], (err, insertRes) => {
                         if (err) {
-                            console.log(err);
+                            //     console.log(err);
                         }
-                        req.connection.query("INSERT INTO movitem (recnum, fkmov, fkvariacao, quantidade, valor) VALUES (?, ?, 16608, 1, ?)", [
-                            response.id,
-                            response.id,
-                            response.payments[0].transaction_amount
-                        ], (err, itemRes) => {
-                            if (err) {
-                                console.log(err);
-                            }
-                            console.log(itemRes);
+                        req.connection.query("SELECT id_variacao from produtoml WHERE id_ml = ?", [response.order_items[0].item.id], (err, variacao) => {
+
+                            req.connection.query("INSERT INTO movitem (recnum, fkmov, fkvariacao, quantidade, valor) VALUES (?, ?, ?, 1, ?)", [
+                                response.id,
+                                response.id,
+                                variacao[0].id_variacao,
+                                response.payments[0].transaction_amount
+                            ], (err, itemRes) => {
+                                if (err) {
+                                    //  console.log(err);
+                                }
+                                //console.log(itemRes);
+                            });
                         });
+
                     })
                 })
             }
 
         });
-        console.log(response.payments.total_paid_amount);
+        // console.log(response.payments.total_paid_amount);
         res.render('detalheOrderPage', { order: response });
     })
 

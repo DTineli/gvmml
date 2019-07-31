@@ -44,8 +44,14 @@ exports.postAnuncio = (req, res, next) => {
         "currency_id": "BRL",
         "available_quantity": "1",
         "buying_mode": "buy_it_now",
-        "listing_type_id": "free",
+        "listing_type_id": "bronze",
         "description": { "plain_text": req.body.descricao },
+        "shipping": {
+            "mode": "ME2",
+            "local_pick_up": false,
+            "free_shipping": false,
+            "free_methods": []
+        },
         "attributes": [{
             "id": "ITEM_CONDITION", "value_id": "2230284"
         }],
